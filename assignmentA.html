@@ -1,0 +1,41 @@
+# Base class: Superhero
+class Superhero:
+    def __init__(self, name, power, city):
+        self.name = name
+        self.power = power
+        self.city = city
+        self._secret_identity = None  # Encapsulation: "protected" attribute (convention)
+
+    def set_secret_identity(self, identity):
+        self._secret_identity = identity
+
+    def reveal_identity(self):
+        if self._secret_identity:
+            return f"{self.name}'s secret identity is {self._secret_identity}."
+        else:
+            return f"{self.name} keeps their identity secret!"
+
+    def use_power(self):
+        print(f"{self.name} uses their power: {self.power}!")
+
+# Subclass: FlyingSuperhero inherits from Superhero
+class FlyingSuperhero(Superhero):
+    def __init__(self, name, power, city, flying_speed):
+        super().__init__(name, power, city)  # Call parent constructor
+        self.flying_speed = flying_speed
+
+    # Polymorphism: override use_power()
+    def use_power(self):
+        print(f"{self.name} soars through {self.city} at {self.flying_speed} km/h using {self.power}!")
+
+# Creating objects with unique values
+hero1 = Superhero("ShadowStrike", "Invisibility", "Metropolis")
+hero1.set_secret_identity("Clark Kent")
+
+hero2 = FlyingSuperhero("SkyFlash", "Super Speed Flight", "Gotham", 900)
+
+print(hero1.reveal_identity())
+hero1.use_power()
+
+print(hero2.reveal_identity())
+hero2.use_power()
